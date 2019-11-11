@@ -17,7 +17,8 @@ pipeline {
             }
             post {
                 always {
-                    junit '/DockerExerciseApplication/target/surefire-reports/*.xml'
+                      sh 'ln -s tests/test-results-unit.xml $WORKSPACE'
+  		      junit "test-results-unit.xml"
                 }
             }
         }
