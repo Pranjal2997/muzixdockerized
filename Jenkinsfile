@@ -8,19 +8,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn -B -DskipTests clean compile package'
             }
         }
         stage('Test') {
             steps {
                 sh 'mvn test'
             }
-            post {
-                always {
-                      sh 'ln -s tests/test-results-unit.xml $WORKSPACE'
-  		      junit "test-results-unit.xml"
-                }
-            }
+         
         }
         stage('Deliver') {
             steps {
